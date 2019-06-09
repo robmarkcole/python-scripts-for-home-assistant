@@ -6,10 +6,10 @@ time = "{}_{}_{}_{}_{}_{}_{}".format(
     now.year, now.month, now.day, now.hour,
     now.minute, now.second, now.microsecond)
 
-folder = '/home/pi/.homeassistant/camera_captures/'
+folder = '/config/www/front_door_'
 filename = folder + time + '.jpg'
 
 hass.services.call(
     'camera', 'snapshot',
-    {'entity_id': 'camera.raspberry_pi_camera',
+    {'entity_id': 'camera.driveway_dericam',
      'filename': filename})
