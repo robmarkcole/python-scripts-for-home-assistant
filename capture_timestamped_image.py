@@ -3,8 +3,8 @@ Capture a timestamped camera image using the service camera.snapshot.
 """
 BLINK_SLEEP_TIME = 7  # seconds to wait for Blink
 HA_SLEEP_TIME = 3 # seconds to wait for HA
-CAMERA_ENTITY_ID = 'camera.blink_kitchen'
-CAMERA_NAME = 'Kitchen'
+CAMERA_ENTITY_ID = 'camera.blink_living_room'
+CAMERA_NAME = 'Living_room'
 
 now = datetime.datetime.now()
 time_str = "{}_{}_{}_{}_{}_{}_{}".format(
@@ -35,8 +35,8 @@ hass.services.call(
 time.sleep(HA_SLEEP_TIME)
 
 hass.services.call(
-    'notify', 'pushbullet_robin', {
-        "message": "File saved : " + filename,
-        "title": "blink {} notification".format(CAMERA_NAME),
-        "data": {"file": filename}
+    'telegram_bot', 'send_photo', {
+        "caption": "New blink capture at {}:{}:{}".format(now.hour,
+                                                          now.minute, now.second),
+        "file": filename
     })
